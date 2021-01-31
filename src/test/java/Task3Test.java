@@ -7,6 +7,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
@@ -77,9 +79,9 @@ public class Task3Test extends Assert {
 
         //ждём пока прогрузится, лучше не придумал
         try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            new WebDriverWait(driver, 3).until(ExpectedConditions.stalenessOf(driver.findElement(By.cssSelector(cfg.firstSamsung()))));
+        } catch (WebDriverException e) {
+
         }
 
         //Ищем первый Самсунг
