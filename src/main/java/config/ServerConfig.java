@@ -33,6 +33,9 @@ public interface ServerConfig extends Config {
     @Key("firstXiaomi")
     String firstXiaomi();
 
+    @Key("add")
+    String add();
+
     @Key("compare")
     String compare();
 

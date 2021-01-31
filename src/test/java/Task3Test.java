@@ -94,6 +94,11 @@ public class Task3Test extends Assert {
         //добавляем к сравнению
         String idSelector = "article[data-zone-data*='" + samsungId + "'] div[aria-label*='сравнению']";
         driver.findElement(By.cssSelector(idSelector)).click();
+        WebElement sams = driver.findElement(By.xpath(cfg.add()));
+
+        //Проверяем что телефон добавлен
+        Assert.assertTrue(sams.getText().contains("Samsung"));
+        logger.info("Samsung added " + sams.getText());
 
         //Ищем первый Сяоми
         WebElement xiaomiUrl;
@@ -105,6 +110,11 @@ public class Task3Test extends Assert {
         //добавляем к сравнению
         idSelector = "article[data-zone-data*='" + xiaomiId + "'] div[aria-label*='сравнению']";
         driver.findElement(By.cssSelector(idSelector)).click();
+        WebElement xia = driver.findElement(By.xpath(cfg.add()));
+
+        //Проверяем что телефон добавлен
+        Assert.assertTrue(xia.getText().contains("Xiaomi"));
+        logger.info("Xiaomi added " + xia.getText());
 
         //Сравниваем
         driver.get(cfg.compare());
