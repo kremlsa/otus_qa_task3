@@ -61,6 +61,13 @@ public class Task3Test extends Assert {
         //Открываем главную страницу маркета
         driver.get(cfg.urlYandex());
 
+        //Соглашаемся со всем
+        try {
+            driver.findElement(By.xpath(cfg.alert())).click();
+        } catch (WebDriverException we) {
+            //do nothing
+        }
+
         //Переходим в раздел Электроника
         driver.findElement(By.cssSelector(cfg.electronicChapter())).click();
 
@@ -68,7 +75,11 @@ public class Task3Test extends Assert {
         driver.findElement(By.cssSelector(cfg.phoneChapter())).click();
 
         //Соглашаемся со всем
-        driver.findElement(By.xpath(cfg.alert())).click();
+        try {
+            driver.findElement(By.xpath(cfg.alert())).click();
+        } catch (WebDriverException we) {
+            //do nothing
+        }
 
         //Отмечаем чекбоксы Самсунг и Сяоми
         driver.findElement(By.cssSelector(cfg.samsungBox())).click();
@@ -77,12 +88,8 @@ public class Task3Test extends Assert {
         //Сортируем по цене
         driver.findElement(By.cssSelector(cfg.sortByPrice())).click();
 
-        //ждём пока прогрузится, лучше не придумал
-        try {
-            new WebDriverWait(driver, 3).until(ExpectedConditions.stalenessOf(driver.findElement(By.cssSelector(cfg.firstSamsung()))));
-        } catch (WebDriverException e) {
-
-        }
+        //ждём пока прогрузится новый список с элементами
+        new WebDriverWait(driver, 3).until(ExpectedConditions.invisibilityOf(driver.findElement(By.cssSelector(cfg.firstSamsung()))));
 
         //Ищем первый Самсунг
         WebElement samsungUrl;
